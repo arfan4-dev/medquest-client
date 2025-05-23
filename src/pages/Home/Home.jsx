@@ -5,12 +5,16 @@ import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 import Progress from "../../components/Progress";
 import RecentTests from "../../components/RecentTests";
 import DefaultLayout from "../../layouts/DefaultLayout";
-import { getCurrentUser } from "../../store/features/auth/auth.service";
+import {
+  fetchTotalUsers,
+  getCurrentUser,
+} from "../../store/features/auth/auth.service";
 
 const Home = () => {
   const { user = {} } = useSelector((state) => state?.user?.selectedUser || {});
-  const dispatch = useDispatch();
+  const { totalUsers } = useSelector((state) => state?.user?.selectedUser || 0);
 
+  const dispatch = useDispatch();
   const userType = user?.userType?.plan || "";
   const isUserPremium = userType === "FREE";
   useEffect(() => {
@@ -31,7 +35,15 @@ const Home = () => {
     if (!user.id) {
       fetchUser();
     }
+    if (window.gtag && totalUsers > 0) {
+      window.gtag("event", "total_users_report", {
+        event_category: "analytics",
+        event_label: "Total Users Count",
+        value: totalUsers,
+      });
+    }
   }, [dispatch]);
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName={`Welcome ${user?.lastName || ""}!`} />

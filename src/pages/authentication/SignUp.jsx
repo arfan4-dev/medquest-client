@@ -51,8 +51,7 @@ const SignUp = () => {
         <>
           <Link
             to="/home"
-            className="sticky top-0 py-2 m-auto text-center bg-white z-99"
-          >
+            className="sticky top-0 py-2 m-auto text-center bg-white z-99">
             <p className="text-title-sm font-semibold text-[#3A57E8] bg-white py-3">
               MEDQUEST
             </p>
@@ -98,8 +97,7 @@ const SignUp = () => {
                 setFormValues(values);
                 setShowRecheckEmail(true);
                 setSubmitting(false);
-              }}
-            >
+              }}>
               {({ setFieldValue, isSubmitting, errors }) => (
                 <Form className="space-y-6">
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-1">
@@ -108,8 +106,7 @@ const SignUp = () => {
                         <div key={field.name}>
                           <label
                             htmlFor={field.name}
-                            className="block font-normal text-title-p text-black-3"
-                          >
+                            className="block font-normal text-title-p text-black-3">
                             {field.label}
                             <FaAsterisk
                               size={6}
@@ -122,8 +119,7 @@ const SignUp = () => {
                                 as="select"
                                 id={field.name}
                                 name={field.name}
-                                className="mt-3 p-3 text-secondary text-title-p bg-white focus:outline-none rounded-[4px] w-full border border-[#CED4DA] placeholder-secondary"
-                              >
+                                className="mt-3 p-3 text-secondary text-title-p bg-white focus:outline-none rounded-[4px] w-full border border-[#CED4DA] placeholder-secondary">
                                 <option value="" label="Select your year" />
                                 {years.map((year) => (
                                   <option key={year.value} value={year.value}>
@@ -139,8 +135,7 @@ const SignUp = () => {
                                 className="mt-3 p-3 text-secondary text-title-p bg-white focus:outline-none rounded-[4px] w-full border border-[#CED4DA] placeholder-secondary"
                                 onChange={(e) =>
                                   handleCityChange(e, setFieldValue)
-                                }
-                              >
+                                }>
                                 <option value="" label="Select your city" />
                                 {Array.from(
                                   new Set(
@@ -157,8 +152,7 @@ const SignUp = () => {
                                 as="select"
                                 id={field.name}
                                 name={field.name}
-                                className="mt-3 p-3 text-secondary text-title-p bg-white focus:outline-none rounded-[4px] w-full border border-[#CED4DA] placeholder-secondary"
-                              >
+                                className="mt-3 p-3 text-secondary text-title-p bg-white focus:outline-none rounded-[4px] w-full border border-[#CED4DA] placeholder-secondary">
                                 <option
                                   value=""
                                   label="Select your university"
@@ -199,8 +193,7 @@ const SignUp = () => {
                                       ? togglePasswordVisibility
                                       : toggleConfirmPasswordVisibility
                                   }
-                                  className="absolute transform -translate-y-1/2 right-3 top-10 text-primary"
-                                >
+                                  className="absolute transform -translate-y-1/2 right-3 top-10 text-primary">
                                   {(field.name === "password" &&
                                     showPassword) ||
                                   (field.name === "confirmPassword" &&
@@ -241,16 +234,14 @@ const SignUp = () => {
                             return;
                           }
                           setStep(2);
-                        }}
-                      >
+                        }}>
                         Continue
                       </button>
                     ) : (
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="bg-[#0D6EFD] text-title-p rounded-[4px] border text-white font-normal py-2 focus:outline-none w-full hover:shadow-md"
-                      >
+                        className="bg-[#0D6EFD] text-title-p rounded-[4px] border text-white font-normal py-2 focus:outline-none w-full hover:shadow-md">
                         {isSubmitting ? "Submitting..." : "Submit"}
                       </button>
                     )}
@@ -277,9 +268,21 @@ const SignUp = () => {
             try {
               const dataToSubmit = { ...formValues, email: values.email };
               const res = await dispatch(registerUser(dataToSubmit));
-
               if (res.type === "registerUser/fulfilled") {
                 localStorage.setItem("userId", res.payload?.data?.id);
+
+                // ✅ Set user ID for GA4 session tracking
+                window.gtag &&
+                  window.gtag("config", "G-RYTHBH8GW2", {
+                    user_id: res.payload?.data?.id,
+                  });
+                // ✅ Track new user
+                window.gtag &&
+                  window.gtag("event", "new_user_created", {
+                    user_id: res.payload?.data?.id || "", // optional but recommended
+                    method: "email", // or "google" etc. if social auth
+                  });
+
                 navigate("/email-confirmation");
               }
             } catch (error) {
@@ -287,8 +290,7 @@ const SignUp = () => {
             } finally {
               setSubmitting(false);
             }
-          }}
-        >
+          }}>
           {({ isSubmitting }) => (
             <div className="flex items-center justify-center min-h-screen bg-white">
               <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
@@ -299,8 +301,7 @@ const SignUp = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
+                      className="block mb-2 text-sm font-medium text-gray-700">
                       Email Address
                     </label>
                     <Field
@@ -321,8 +322,7 @@ const SignUp = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-3 text-white rounded-md bg-[#3A57E8] hover:bg-[#2a41b8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3A57E8]"
-                    >
+                      className="w-full py-3 text-white rounded-md bg-[#3A57E8] hover:bg-[#2a41b8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3A57E8]">
                       {isSubmitting ? "Submitting..." : "Confirm & Register"}
                     </button>
                   </div>

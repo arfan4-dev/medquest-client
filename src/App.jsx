@@ -22,17 +22,17 @@ import {
   Topic,
   VerifyEmail,
 } from "./routes/lazyImports";
-
+import PageTracker from "./components/google-analytic/PageTracker";
 function App() {
   return (
     <Router>
+      <PageTracker />
       <Suspense
         fallback={
           <div className="flex items-center justify-center min-h-screen">
             <Loader />
           </div>
-        }
-      >
+        }>
         <Routes>
           <Route
             path="/"

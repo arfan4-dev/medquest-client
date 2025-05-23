@@ -34,8 +34,7 @@ const Login = () => {
     <>
       <Link
         to="/home"
-        className="sticky z-10 py-2 m-auto text-center bg-white top-3"
-      >
+        className="sticky z-10 py-2 m-auto text-center bg-white top-3">
         <p className="text-title-sm font-semibold bg-white text-[#3A57E8]">
           MEDQUEST
         </p>
@@ -80,16 +79,30 @@ const Login = () => {
                 );
 
                 if (response.type === "loginUser/fulfilled") {
-                  navigate("/home");
+                 
 
+                  const userId = response.payload?.data?.user?.id; // 🔁 adjust key if needed
+                 
+                  // ✅ Google Analytics tracking
+                  window.gtag &&
+                    window.gtag("config", "G-RYTHBH8GW2", {
+                      user_id: userId,
+                    });
+
+                  window.gtag &&
+                    window.gtag("event", "user_logged_in", {
+                      method: "email",
+                      user_id: userId,
+                    });
+
+                  navigate("/home");
                   resetForm();
                 }
               } catch (error) {
               } finally {
                 setSubmitting(false);
               }
-            }}
-          >
+            }}>
             {({ isSubmitting, setFieldValue }) => (
               <Form className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-1">
@@ -97,8 +110,7 @@ const Login = () => {
                     <div key={field.name}>
                       <label
                         htmlFor={field.name}
-                        className="block font-normal text-title-p text-black-3"
-                      >
+                        className="block font-normal text-title-p text-black-3">
                         {field.label}
                       </label>
                       <Field
@@ -120,8 +132,7 @@ const Login = () => {
                   <div>
                     <label
                       htmlFor="password"
-                      className="block font-normal text-title-p text-black-3"
-                    >
+                      className="block font-normal text-title-p text-black-3">
                       Password
                     </label>
                     <div className="relative mt-3">
@@ -134,8 +145,7 @@ const Login = () => {
                       />
                       <span
                         onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute top-[50%] transform -translate-y-[50%] right-3 cursor-pointer text-[#CED4DA]"
-                      >
+                        className="absolute top-[50%] transform -translate-y-[50%] right-3 cursor-pointer text-[#CED4DA]">
                         {showPassword ? (
                           <FaEyeSlash color="#36454F" size={20} />
                         ) : (
@@ -167,8 +177,7 @@ const Login = () => {
                   </div>
                   <Link
                     to="/forgot-password"
-                    className="text-[#0D6EFD] text-title-p underline"
-                  >
+                    className="text-[#0D6EFD] text-title-p underline">
                     Forgot password
                   </Link>
                 </div>

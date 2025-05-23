@@ -162,3 +162,17 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+
+// AsyncThunk
+export const fetchTotalUsers = createAsyncThunk(
+  "fetchTotalUsers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/users/total-users");
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || "Something went wrong");
+    }
+  }
+);
