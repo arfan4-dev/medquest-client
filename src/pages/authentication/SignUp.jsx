@@ -45,6 +45,7 @@ const SignUp = () => {
     label: `Year ${i + 1}`,
     value: `Year${i + 1}`,
   }));
+  
   return (
     <>
       {!showRecheckEmail ? (
@@ -273,9 +274,18 @@ const SignUp = () => {
 
                 // ✅ Set user ID for GA4 session tracking
                 window.gtag &&
-                  window.gtag("config", "G-RYTHBH8GW2", {
+                  window.gtag("config", import.meta.env.VITE_MEASUREMENT_ID, {
                     user_id: res.payload?.data?.id,
                   });
+
+
+                // ✅ Set custom properties: year & school
+                window.gtag &&
+                  window.gtag("set", "user_properties", {
+                    year: formValues.year,
+                    school: formValues.university,
+                  });
+                  
                 // ✅ Track new user
                 window.gtag &&
                   window.gtag("event", "new_user_created", {

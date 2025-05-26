@@ -20,7 +20,7 @@ const CreateQuizModal = ({
   const { subjectQuestions: questions = [] } = useSelector(
     (state) => state?.quiz
   );
-
+  const { user = {} } = useSelector((state) => state?.user?.selectedUser || {});
   const { subjectQuestions = [] } = questions;
   const navigate = useNavigate();
   const [loading, setLoading] = useState({
@@ -95,6 +95,18 @@ const CreateQuizModal = ({
 
         if (res.type === "createQuiz/fulfilled") {
           quizId = res.payload?.data?.quiz?._id;
+
+          // Google Analytics Event
+          window.gtag &&
+            window.gtag("event", "quiz_created", {
+              user_id: user._id, // get it from useSelector
+              mode,
+              topic_count: values?.subject?.length,
+              total_questions: questionCount,
+              university: Array.isArray(university)
+                ? university.join(", ")
+                : university,
+            });
         }
 
         await dispatch(
@@ -178,8 +190,7 @@ const CreateQuizModal = ({
           <button
             type="button"
             className="text-[#6B7280] hover:text-gray-600"
-            onClick={closeModal}
-          >
+            onClick={closeModal}>
             <RxCross2 />
           </button>
         </div>
@@ -219,8 +230,7 @@ const CreateQuizModal = ({
                 onChange={(e) =>
                   setFormData({ ...formdata, questionCount: e.target.value })
                 }
-                className="mt-2 px-4 py-2 w-full h-[42px] text-[#838f9b] text-title-p focus:outline-none rounded-[4px] border border-[#CED4DA] bg-white appearance-none pr-8"
-              >
+                className="mt-2 px-4 py-2 w-full h-[42px] text-[#838f9b] text-title-p focus:outline-none rounded-[4px] border border-[#CED4DA] bg-white appearance-none pr-8">
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
@@ -300,8 +310,7 @@ const CreateQuizModal = ({
             disabled={loading.addLoading}
             type="button"
             onClick={() => handleCreateQuiz("add")}
-            className="text-[#6B7280] flex border hover:border-[#007AFF] border-[#ADB5BD] items-center justify-center hover:text-white hover:bg-[#007AFF] shadow-md p-2  rounded-md text-[13px] font-bold"
-          >
+            className="text-[#6B7280] flex border hover:border-[#007AFF] border-[#ADB5BD] items-center justify-center hover:text-white hover:bg-[#007AFF] shadow-md p-2  rounded-md text-[13px] font-bold">
             {loading.addLoading ? (
               <>
                 <span className="">Loading...</span>
@@ -316,8 +325,7 @@ const CreateQuizModal = ({
             type="button"
             className="bg-[#007AFF] text-white font-semibold px-4 py-2 rounded-md flex items-center justify-center"
             disabled={loading.startLoading}
-            onClick={() => handleCreateQuiz("start")}
-          >
+            onClick={() => handleCreateQuiz("start")}>
             {loading.startLoading ? (
               <>
                 <span className="">Loading...</span>

@@ -85,7 +85,7 @@ const Login = () => {
                  
                   // ✅ Google Analytics tracking
                   window.gtag &&
-                    window.gtag("config", "G-RYTHBH8GW2", {
+                    window.gtag("config", import.meta.env.VITE_MEASUREMENT_ID, {
                       user_id: userId,
                     });
 

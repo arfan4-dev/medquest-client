@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "./components/Loader";
 import NonProtectedRoute from "./components/NonProtectedRoute";
@@ -23,7 +23,10 @@ import {
   VerifyEmail,
 } from "./routes/lazyImports";
 import PageTracker from "./components/google-analytic/PageTracker";
+import useTrackUniqueVisitor from "./hooks/useTrackUniqueVisitor";
 function App() {
+  useTrackUniqueVisitor();
+
   return (
     <Router>
       <PageTracker />

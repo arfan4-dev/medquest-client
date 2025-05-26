@@ -7,7 +7,7 @@ import {
 import Suggestions from "./Suggestions";
 
 import { SlArrowRight } from "react-icons/sl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { axiosWithToken } from "../api";
 import { useModal } from "../context/modal";
@@ -34,6 +34,7 @@ const QuestionTemplate = () => {
   const TOTAL_QUESTIONS = Number(Cookies.get("__ALL"));
   const [isAnswerSubmit, setAnswerSubmit] = useState(false);
   const [suggestionText, setSuggestionText] = useState("");
+  const { user = {} } = useSelector((state) => state?.user?.selectedUser || {});
 
   const [showImproveSection, setShowImproveSection] = useState(false);
 
@@ -351,6 +352,18 @@ const QuestionTemplate = () => {
         averageScore: res.data.data.averageScore,
         score: res.data.data.score,
       };
+      // ✅ Google Analytics event for quiz completion
+
+      window.gtag &&
+        window.gtag("event", "quiz_completed", {
+          user_id: user._id, // Make sure this exists, or use Redux/cookie
+          quiz_id: id,
+          total_questions: TOTAL_QUESTIONS,
+          score: res.data.data.score,
+          average_score: res.data.data.averageScore,
+          mode: res.data.data.summary?.mode || "unknown",
+        });
+
       dispatch(filterCompletedQuiz({ id }));
       Cookies.remove("__START");
       Cookies.remove("__TO");
@@ -472,8 +485,7 @@ const QuestionTemplate = () => {
             </p>
             <p
               onClick={openConfirmationModal}
-              className="text-title-p cursor-pointer font-semibold text-[#FF3B30]"
-            >
+              className="text-title-p cursor-pointer font-semibold text-[#FF3B30]">
               End Quiz
             </p>
           </div>
@@ -538,27 +550,29 @@ const QuestionTemplate = () => {
                         }}
                       /> */}
                       <h2 className="font-semibold text-title-p">
-  {(() => {
-    const text = question?.question || "";
-    const trimmed = text.trim();
-    const hasQuestionMark = /[?؟]$/.test(trimmed);
-    const isInterrogative = /^(what|why|when|where|how|is|are|can|does|do|did|who|will|should|could|would)/i.test(
-      trimmed
-    );
+                        {(() => {
+                          const text = question?.question || "";
+                          const trimmed = text.trim();
+                          const hasQuestionMark = /[?؟]$/.test(trimmed);
+                          const isInterrogative =
+                            /^(what|why|when|where|how|is|are|can|does|do|did|who|will|should|could|would)/i.test(
+                              trimmed
+                            );
 
+                          let ending = hasQuestionMark
+                            ? ""
+                            : isInterrogative
+                            ? "?"
+                            : ":";
 
-
-
-
-
-    let ending = hasQuestionMark ? "" : isInterrogative ? "?" : ":";
-
-    return (
-      <span dangerouslySetInnerHTML={{ __html: trimmed + ending }}></span>
-    );
-  })()}
-</h2>
-
+                          return (
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: trimmed + ending,
+                              }}></span>
+                          );
+                        })()}
+                      </h2>
                     </div>
                     {question?.image_url && (
                       <div className="flex my-8 ">
@@ -578,8 +592,7 @@ const QuestionTemplate = () => {
                               category && (
                                 <div
                                   key={index}
-                                  className="flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4"
-                                >
+                                  className="flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4">
                                   <div className="flex items-center">
                                     <input
                                       type="checkbox"
@@ -606,10 +619,15 @@ const QuestionTemplate = () => {
                                       }}
                                     /> */}
                                     <span className="text-[14px] text-primary">
-  <span className="font-bold mr-1">{String.fromCharCode(65 + index)}.</span>
-  <span dangerouslySetInnerHTML={{ __html: category }} />
-</span>
-
+                                      <span className="font-bold mr-1">
+                                        {String.fromCharCode(65 + index)}.
+                                      </span>
+                                      <span
+                                        dangerouslySetInnerHTML={{
+                                          __html: category,
+                                        }}
+                                      />
+                                    </span>
                                   </div>
                                 </div>
                               )
@@ -634,8 +652,7 @@ const QuestionTemplate = () => {
                               category && (
                                 <div
                                   key={index}
-                                  className={`flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4  ${backgroundColor}`}
-                                >
+                                  className={`flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4  ${backgroundColor}`}>
                                   <div className="flex items-center">
                                     <input
                                       type="checkbox"
@@ -712,8 +729,7 @@ const QuestionTemplate = () => {
                               disabled={isAnswerSubmit}
                               type="submit"
                               rightIcon={SlArrowRight}
-                              className="bg-[#3A57E8] flex justify-center items-center text-title-p rounded-[4px] text-white font-normal py-2 px-3"
-                            ></Button>
+                              className="bg-[#3A57E8] flex justify-center items-center text-title-p rounded-[4px] text-white font-normal py-2 px-3"></Button>
                           ))}
                       </div>
                     </div>
