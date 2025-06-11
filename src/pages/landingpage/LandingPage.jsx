@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiMiniCheckBadge } from "react-icons/hi2";
 import { RxCross2 } from "react-icons/rx";
+import { RiDiscordLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { DNA, Medical } from "../../assets";
@@ -197,7 +198,7 @@ const LandingPage = () => {
     <>
       {/* <Header />
 
-      <div className="flex justify-end gap-5 pr-3 mt-12 mb-8 md:px-18">
+      <div className="flex gap-5 justify-end pr-3 mt-12 mb-8 md:px-18">
         <Link to="/log-in">
           <button className="bg-[#3A57E8] font-semibold text-nowrap text-title-p text-white py-[10px] px-8 rounded-[6px]">
             Log in
@@ -210,7 +211,7 @@ const LandingPage = () => {
         </Link>
       </div> */}
 
-      <header className="fixed top-0 left-0 flex items-center justify-between w-full px-4 bg-white md:px-8 py-7">
+      <header className="flex fixed top-0 left-0 justify-between items-center px-4 py-7 w-full bg-white md:px-8">
         {/* Logo */}
         <div className="flex justify-center w-full md:justify-start md:w-auto">
           <Logo />
@@ -245,7 +246,7 @@ const LandingPage = () => {
 
         <div></div>
 
-        {/* <div className="items-center hidden space-x-8 md:flex">
+        {/* <div className="hidden items-center space-x-8 md:flex">
           <Link
             to="/log-in"
             className="flex  items-center text-title-p text-[#424242] font-medium hover:text-[#3A57E8]"
@@ -260,7 +261,7 @@ const LandingPage = () => {
           </Link>
         </div>
 
-        <div className="flex items-center gap-x-1 md:hidden">
+        <div className="flex gap-x-1 items-center md:hidden">
           <Link
             to="/log-in"
             className="text-nowrap flex items-center font-medium text-[12px] leading-[18px] text-[#424242]  "
@@ -279,7 +280,7 @@ const LandingPage = () => {
         </div> */}
       </header>
 
-      <div className="mx-auto mt-10 md:mt-44 max-w-screen-2xl ">
+      <div className="mx-auto mt-10 max-w-screen-2xl md:mt-44">
         <div className="mx-auto text-center md:mb-8">
           <h1 className="lg:text-[64px] text-2xl md:leading-5 md:mt-0 mt-32  font-semibold text-[#242424]">
             Prepare, Practice, Perform.
@@ -287,7 +288,7 @@ const LandingPage = () => {
         </div>
 
         {/* Grid Section */}
-        <div className="grid items-start grid-cols-1 gap-6 mt-5 md:grid-cols-3 lg:grid-cols-3 lg:mt-19">
+        <div className="grid grid-cols-1 gap-6 items-start mt-5 md:grid-cols-3 lg:grid-cols-3 lg:mt-19">
           {/* First Image */}
           <div className="hidden md:block">
             <img
@@ -299,7 +300,7 @@ const LandingPage = () => {
 
           {/* Text */}
           <div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col justify-center items-center">
               <h1 className="lg:text-[64px] lg:leading-[58px] text-center text-2xl font-medium text-[#424242] md:mb-12 mb-3">
                 All in one place
               </h1>
@@ -336,8 +337,8 @@ const LandingPage = () => {
         <div className="bg-gray-900">
           <main>
             {/* Pricing section */}
-            <div className="max-w-screen-xl px-6 mx-auto mt-10 lg:mt-50 lg:px-8">
-              <div className="max-w-4xl mx-auto text-center">
+            <div className="px-6 mx-auto mt-10 max-w-screen-xl lg:mt-50 lg:px-8">
+              <div className="mx-auto max-w-4xl text-center">
                 <h1 className="font-semibold text-black lg:text-title-xl">
                   Everything You Need to Learn
                 </h1>
@@ -346,7 +347,7 @@ const LandingPage = () => {
                 </h1>
               </div>
 
-              <div className="max-w-screen-xl py-6 mx-auto lg:my-15">
+              <div className="py-6 mx-auto max-w-screen-xl lg:my-15">
                 <div className="hidden overflow-x-auto lg:block">
                   {/* Desktop Table */}
                   <table className="min-w-full border-collapse border border-[#E6E9F5]">
@@ -542,7 +543,7 @@ const LandingPage = () => {
               >
                 {/* Accordion Header */}
                 <div
-                  className="flex items-center justify-between px-4 py-4 cursor-pointer hover:bg-gray-100"
+                  className="flex justify-between items-center px-4 py-4 cursor-pointer hover:bg-gray-100"
                   onClick={() => toggleAccordion(index)}
                 >
                   <span className="lg:text-[24px]  text-[#374151] font-semibold">
@@ -569,7 +570,7 @@ const LandingPage = () => {
       </section>
 
       <footer className="bg-[#3A57E8] text-white lg:py-25 py-15 ">
-        <div className="container max-w-screen-xl px-6 mx-auto text-center lg:px-8">
+        <div className="container px-6 mx-auto max-w-screen-xl text-center lg:px-8">
           {/* Main Text */}
           <h2 className="lg:text-[40px]  font-bold mb-5">
             Prepare, Practice, Perform.
@@ -579,7 +580,7 @@ const LandingPage = () => {
             performance effortlessly
           </p>
           {/* Contact Button */}
-          <div className="flex items-center justify-center">
+          <div className="flex justify-center items-center">
             <button className="bg-[#F7F9FB] text-[#0A142F] px-5 py-2 rounded-full flex items-center justify-center space-x-2">
               {/* <PiHandWaving color="#ffcf4b" className="w-5 h-5" />{" "} */}
               {/* Hi Icon */}
@@ -590,7 +591,7 @@ const LandingPage = () => {
           {/* Divider */}
           <hr className="my-6 border-t border-white opacity-25 lg:mb-10 lg:mt-24" />
           {/* Footer Bottom */}
-          <div className="flex flex-col items-center justify-between space-y-4 text-sm md:flex-row md:space-y-0">
+          <div className="flex flex-col justify-between items-center space-y-4 text-sm md:flex-row md:space-y-0">
             {/* Left Side */}
             <div className="font-semibold lg:text-title-md">MEDQUEST</div>
             {/* Copyright */}
@@ -601,15 +602,21 @@ const LandingPage = () => {
             <div className="flex space-x-2">
               <Link
                 to="https://www.instagram.com/medquestmaroc/"
-                className="flex items-center justify-center w-8 h-8 text-white border border-white rounded-full lg:w-11 lg:h-11 "
+                className="flex justify-center items-center w-8 h-8 text-white rounded-full border border-white lg:w-11 lg:h-11"
               >
                 <FaFacebookF className="w-3 h-3 text-white lg:w-4 lg:h-4" />
               </Link>
               <Link
                 to="https://www.instagram.com/medquestmaroc/"
-                className="flex items-center justify-center w-8 h-8 text-white border border-white rounded-full lg:w-11 lg:h-11 "
+                className="flex justify-center items-center w-8 h-8 text-white rounded-full border border-white lg:w-11 lg:h-11"
               >
                 <FaTwitter className="w-3 h-3 text-white lg:w-4 lg:h-4" />
+              </Link>
+              <Link
+                to="https://discord.com"
+                className="flex justify-center items-center w-8 h-8 text-white rounded-full border border-white lg:w-11 lg:h-11"
+              >
+                <RiDiscordLine  className="w-5 h-4 text-white lg:w-6 lg:h-6" />
               </Link>
             </div>
           </div>

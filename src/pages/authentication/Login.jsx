@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 import Footer from "../../components/Footer";
 import { LoginSchema } from "../../schema/auth.schema";
 import { loginUser } from "../../store/features/auth/auth.service";
+import { RiLoader2Fill } from "react-icons/ri";
 
 const inputFields = [
   {
@@ -34,14 +35,14 @@ const Login = () => {
     <>
       <Link
         to="/home"
-        className="sticky z-10 py-2 m-auto text-center bg-white top-3">
+        className="sticky top-3 z-10 py-2 m-auto text-center bg-white">
         <p className="text-title-sm font-semibold bg-white text-[#3A57E8]">
           MEDQUEST
         </p>
       </Link>
       <div className="md:w-[360px] m-auto px-4 sm:px-0">
         <div className="max-w-full lg:mt-30 lg:pb-22 mt-15">
-          <Link to="/home" className="relative inline-block md:right-1/2">
+          <Link to="/home" className="inline-block relative md:right-1/2">
             <Button
               text="Back"
               type="button"
@@ -161,7 +162,7 @@ const Login = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between py-2">
+                <div className="flex justify-between items-center py-2">
                   <div className="flex items-center">
                     <input
                       onChange={(e) =>
@@ -182,10 +183,10 @@ const Login = () => {
                   </Link>
                 </div>
 
-                <div className="flex items-center justify-center w-full">
+                <div className="flex justify-center items-center w-full">
                   <Button
                     disabled={isSubmitting}
-                    text="Sign in"
+                    text={isSubmitting ? "Loading..." : "Sign in"}
                     type="submit"
                     className="bg-[#0D6EFD] text-title-p mx-auto item-center rounded-[4px] border text-white font-normal py-2 focus:outline-none w-full"
                   />

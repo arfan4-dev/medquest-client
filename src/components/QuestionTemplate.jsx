@@ -14,18 +14,19 @@ import { useModal } from "../context/modal";
 import decryptQuestionData from "../helpers/decrypt.helpers";
 import { updatePerformance } from "../store/features/auth/auth.slice";
 import { resetComments } from "../store/features/discussion/discussion.slice";
+import { getRemainingTime } from "../store/features/quiz/quiz.service";
 import {
   filterCompletedQuiz,
   incrementResumeIndex,
 } from "../store/features/quiz/quiz.slice";
 import calculatePageNumber from "../utils/calculatePage";
 import Button from "./Button";
+import Loader from "./Loader";
 import Modal from "./modal";
 import WarningModal from "./modal/WarningModal";
-import Timer from "./Timer";
-import { getRemainingTime } from "../store/features/quiz/quiz.service";
 import Scoreboard from "./Scoreboard";
-import Loader from "./Loader";
+import Timer from "./Timer";
+import { removeOptionPrefix } from "../utils/remove-prefix";
 
 const QuestionTemplate = () => {
   const location = useLocation();
@@ -479,7 +480,7 @@ const QuestionTemplate = () => {
     <>
       {questions && questions.length > 0 ? (
         <div className="bg-[#ECEFF7] min-h-screen select-none">
-          <div className="flex items-center justify-between px-4 py-4 m-auto text-center bg-white shadow lg:px-7">
+          <div className="flex justify-between items-center px-4 py-4 m-auto text-center bg-white shadow lg:px-7">
             <p className="text-title-sm font-semibold text-[#3A57E8]">
               MEDQUEST
             </p>
@@ -489,8 +490,8 @@ const QuestionTemplate = () => {
               End Quiz
             </p>
           </div>
-          <div className="container max-w-screen-xl px-4 py-8 pb-40 mx-auto">
-            <div className="flex flex-wrap justify-between lg:justify-center items-start gap-5 lg:gap-x-20 lg:flex-nowrap">
+          <div className="container px-4 py-8 pb-40 mx-auto max-w-screen-xl">
+            <div className="flex flex-wrap gap-5 justify-between items-start lg:justify-center lg:gap-x-20 lg:flex-nowrap">
               <div className="lg:w-[12%] w-fit">
                 <Scoreboard
                   averageScore={
@@ -575,7 +576,7 @@ const QuestionTemplate = () => {
                       </h2>
                     </div>
                     {question?.image_url && (
-                      <div className="flex my-8 ">
+                      <div className="flex my-8">
                         <img
                           src={question?.image_url}
                           className="w-64 h-32"
@@ -612,19 +613,14 @@ const QuestionTemplate = () => {
                                           : false
                                       }
                                     />
-                                    {/* <span
-                                      className="text-[14px] text-primary"
-                                      dangerouslySetInnerHTML={{
-                                        __html: category,
-                                      }}
-                                    /> */}
+                                   
                                     <span className="text-[14px] text-primary">
-                                      <span className="font-bold mr-1">
+                                      <span className="mr-1 font-bold">
                                         {String.fromCharCode(65 + index)}.
                                       </span>
                                       <span
                                         dangerouslySetInnerHTML={{
-                                          __html: category,
+                                          __html: removeOptionPrefix(category),
                                         }}
                                       />
                                     </span>
@@ -756,7 +752,7 @@ const QuestionTemplate = () => {
           <Modal />
         </div>
       ) : (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex justify-center items-center h-screen">
           <Loader />
         </div>
       )}
