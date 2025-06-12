@@ -486,7 +486,8 @@ const QuestionTemplate = () => {
             </p>
             <p
               onClick={openConfirmationModal}
-              className="text-title-p cursor-pointer font-semibold text-[#FF3B30]">
+              className="text-title-p cursor-pointer font-semibold text-[#FF3B30]"
+            >
               End Quiz
             </p>
           </div>
@@ -544,12 +545,6 @@ const QuestionTemplate = () => {
                   </div>
                   <div>
                     <div className="my-6 mt-6">
-                      {/* <h2
-                        className="font-semibold text-title-p"
-                        dangerouslySetInnerHTML={{
-                          __html: question?.question || "",
-                        }}
-                      /> */}
                       <h2 className="font-semibold text-title-p">
                         {(() => {
                           const text = question?.question || "";
@@ -570,7 +565,8 @@ const QuestionTemplate = () => {
                             <span
                               dangerouslySetInnerHTML={{
                                 __html: trimmed + ending,
-                              }}></span>
+                              }}
+                            ></span>
                           );
                         })()}
                       </h2>
@@ -593,7 +589,8 @@ const QuestionTemplate = () => {
                               category && (
                                 <div
                                   key={index}
-                                  className="flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4">
+                                  className="flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4"
+                                >
                                   <div className="flex items-center">
                                     <input
                                       type="checkbox"
@@ -613,7 +610,7 @@ const QuestionTemplate = () => {
                                           : false
                                       }
                                     />
-                                   
+
                                     <span className="text-[14px] text-primary">
                                       <span className="mr-1 font-bold">
                                         {String.fromCharCode(65 + index)}.
@@ -648,7 +645,8 @@ const QuestionTemplate = () => {
                               category && (
                                 <div
                                   key={index}
-                                  className={`flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4  ${backgroundColor}`}>
+                                  className={`flex justify-between items-center border-b border-[#DEE2E6] py-2 px-4  ${backgroundColor}`}
+                                >
                                   <div className="flex items-center">
                                     <input
                                       type="checkbox"
@@ -668,10 +666,13 @@ const QuestionTemplate = () => {
                                           : false
                                       }
                                     />
+                                     <span className="mr-1 text-sm font-bold">
+                                        {String.fromCharCode(65 + index)}.
+                                      </span>
                                     <span
                                       className="text-[14px] text-primary"
                                       dangerouslySetInnerHTML={{
-                                        __html: category,
+                                        __html: removeOptionPrefix(category),
                                       }}
                                     />
                                   </div>
@@ -725,7 +726,8 @@ const QuestionTemplate = () => {
                               disabled={isAnswerSubmit}
                               type="submit"
                               rightIcon={SlArrowRight}
-                              className="bg-[#3A57E8] flex justify-center items-center text-title-p rounded-[4px] text-white font-normal py-2 px-3"></Button>
+                              className="bg-[#3A57E8] flex justify-center items-center text-title-p rounded-[4px] text-white font-normal py-2 px-3"
+                            ></Button>
                           ))}
                       </div>
                     </div>
