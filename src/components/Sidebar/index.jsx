@@ -40,14 +40,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-[#FFFFFF] duration-300 ease-linear  lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-[#FFFFFF] duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       <div className="flex items-center justify-between border-b border-[#F4F7FE] lg:justify-center mt-2 gap-2 px-6 py-5.5 lg:py-1">
         <NavLink to="/">
-          <p className="text-title-md  font-bold py-5 text-[#3A57E8]">
-            MEDQUEST
+          <p className="text-title-md font-bold py-5 text-[#3A57E8]">
+            MEDQUEST-BETA
           </p>
         </NavLink>
 
@@ -73,7 +73,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </svg>
         </button>
       </div>
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+      <div className="flex flex-col flex-1 overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav className="px-4 py-4 mt-5 lg:mt-9 lg:px-6">
           <div>
             <ul className="mb-5 flex flex-col gap-1.5">
@@ -82,7 +82,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 px-4 py-2 font-semibold rounded-lg duration-300 ease-in-out ${
                     isActive
-                      ? "bg-[#ECEFF7] text-[#3A57E8] text-title-p border border-[#3A57E8] "
+                      ? "bg-[#ECEFF7] text-[#3A57E8] text-title-p border border-[#3A57E8]"
                       : "text-[#8A92A6] text-title-p"
                   }`
                 }
@@ -97,7 +97,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 px-4 py-2 font-semibold rounded-lg duration-300 ease-in-out ${
                     isActive
-                      ? "bg-[#ECEFF7] text-[#3A57E8] text-title-p border border-[#3A57E8] "
+                      ? "bg-[#ECEFF7] text-[#3A57E8] text-title-p border border-[#3A57E8]"
                       : "text-[#8A92A6] text-title-p"
                   }`
                 }
@@ -112,7 +112,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 className={({ isActive }) =>
                   `group relative flex items-center gap-2.5 px-4 py-2 font-semibold rounded-lg duration-300 ease-in-out ${
                     isActive
-                      ? "bg-[#ECEFF7] text-[#3A57E8] text-title-p border border-[#3A57E8] "
+                      ? "bg-[#ECEFF7] text-[#3A57E8] text-title-p border border-[#3A57E8]"
                       : "text-[#8A92A6] text-title-p"
                   }`
                 }
@@ -123,6 +123,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </ul>
           </div>
         </nav>
+        <div className="mt-auto   text-center text-lg  pr-4 mb-3">
+          <span className="text-[#8A92A6]">Beta</span>
+        </div>
       </div>
     </aside>
   );

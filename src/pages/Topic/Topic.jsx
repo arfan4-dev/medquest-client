@@ -585,9 +585,9 @@ const Topic = () => {
                 <h2 className="font-semibold text-title-sm text-primary">
                   Categories - {user?.year?.replace(/(\D)(\d)/, "$1 $2") || ""}
                 </h2>
-                <h2 className="text-[13px] text-primary font-bold">
+                {/* <h2 className="text-[13px] text-primary font-bold">
                   Attempted
-                </h2>
+                </h2> */}
               </div>
 
               {formErrors.subjects && (
@@ -653,10 +653,10 @@ const Topic = () => {
                             )}
                           </span>
                         </div>
-                        <span className="text-white text-[10px] font-semibold text-nowrap bg-[#007AFF] min-w-11 text-center py-1 rounded-md">
+                        {/* <span className="text-white text-[10px] font-semibold text-nowrap bg-[#007AFF] min-w-11 text-center py-1 rounded-md">
                           1 of&nbsp;
                           {calculateFilteredTotal(category, selectedCategories)}
-                        </span>
+                        </span> */}
                       </div>
                       {expandedCategories.includes(index) &&
                         category?.schools && (
@@ -696,9 +696,9 @@ const Topic = () => {
                                       {subcategory?.school}
                                     </span>
                                   </div>
-                                  <span className="text-white text-[10px] font-semibold bg-[#007AFF] px-2 py-1 rounded-md">
+                                  {/* <span className="text-white text-[10px] font-semibold bg-[#007AFF] px-2 py-1 rounded-md">
                                     1 of {subcategory?.count}
-                                  </span>
+                                  </span> */}
                                 </div>
                               )
                             )}
