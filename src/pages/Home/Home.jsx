@@ -40,10 +40,12 @@ const Home = () => {
         event_category: "analytics",
         event_label: "Total Users Count",
         value: totalUsers,
+        debug_mode: true, // 👈 important
       });
     }
   }, [dispatch]);
 
+  console.log("totalUsers:", totalUsers);
   return (
     <DefaultLayout>
       <Breadcrumb pageName={`Welcome ${user?.lastName || ""}!`} />
